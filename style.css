@@ -584,9 +584,41 @@ textarea:focus {
     font-size: 0.9rem;
 }
 
-/* Map */
+/* Map Section */
 .map-section {
+    padding: 100px 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/kurunegala-city.jpg') center/cover no-repeat;
+    position: relative;
+}
+
+.map-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.map-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
     line-height: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-wrapper iframe {
+    filter: grayscale(1) contrast(1.2) opacity(0.8);
+    transition: var(--transition);
+}
+
+.map-wrapper:hover iframe {
+    filter: grayscale(0) contrast(1) opacity(1);
+}
+
+@media (max-width: 768px) {
+    .map-section {
+        padding: 60px 0;
+    }
 }
 
 /* Footer */
