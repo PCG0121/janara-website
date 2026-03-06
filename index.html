@@ -20,6 +20,7 @@
 
     <!-- Base Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <link rel="preload" as="image" href="images/hero-image.jpg">
 </head>
 
 <body>
@@ -56,14 +57,80 @@
     <!-- Hero Section -->
     <header class="hero" id="home">
         <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="fade-in">JANARA</h1>
-            <p class="fade-in">Experience the pinnacle of urban luxury at the heart of the city.</p>
-            <div class="hero-btns fade-in">
-                <a href="#contact" class="btn btn-primary">Book Your Stay</a>
-                <a href="#experience" class="btn btn-outline">Explore More</a>
+
+        <!-- Floating Decorative Elements -->
+        <div class="hero-decoration">
+            <div class="floating-circle circle-1"></div>
+            <div class="floating-circle circle-2"></div>
+            <div class="floating-circle circle-3"></div>
+        </div>
+
+        <div class="hero-container">
+            <!-- Left Content -->
+            <div class="hero-left">
+                <div class="hero-badge fade-in">
+                    <i class="fas fa-star"></i>
+                    <span>Luxury Redefined</span>
+                </div>
+                <h1 class="hero-title fade-in">
+                    <span class="hero-title-line">Escape to</span>
+                    <span class="hero-title-main">JANARA</span>
+                    <span class="hero-title-line">Luxury Cabana</span>
+                </h1>
+                <p class="hero-description fade-in">
+                    Immerse yourself in a peaceful natural escape where modern luxury meets serene tranquility.
+                    Your private sanctuary awaits.
+                </p>
+
+                <div class="hero-features fade-in">
+                    <div class="hero-feature">
+                        <i class="fas fa-swimming-pool"></i>
+                        <span>Private Pool</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-leaf"></i>
+                        <span>Natural Setting</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-concierge-bell"></i>
+                        <span>Premium Service</span>
+                    </div>
+                </div>
+
+                <div class="hero-btns fade-in">
+                    <a href="#contact" class="btn btn-primary btn-hero">
+                        <span>Reserve Your Escape</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#experience" class="btn btn-outline btn-hero">
+                        <span>Discover More</span>
+                        <i class="fas fa-play"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual -->
+            <div class="hero-right">
+                <div class="hero-image-wrapper fade-in">
+                    <div class="hero-image-card">
+                        <img src="images/hero-image.jpg" alt="Janara Luxury Cabana" loading="eager" fetchpriority="high"
+                            decoding="async" width="2000" height="1333" sizes="(max-width: 991px) 100vw, 50vw">
+                        <div class="hero-image-overlay"></div>
+                    </div>
+                    <!-- Floating Info Card -->
+                    <div class="hero-info-card">
+                        <div class="info-card-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-card-content">
+                            <h4>Kurunegala</h4>
+                            <p>Sri Lanka</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="hero-scroll-indicator">
             <div class="mouse"></div>
             <span>Scroll Down</span>
@@ -75,7 +142,8 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-img reveal-left">
-                    <img src="images/about-pool.jpg" alt="Janara Luxury Private Pool">
+                    <img src="images/about-pool.jpg" alt="Janara Luxury Private Pool" loading="lazy" decoding="async"
+                        width="1500" height="2000" sizes="(max-width: 991px) 100vw, 50vw">
                 </div>
                 <div class="about-text reveal-right">
                     <span class="subtitle">The Peaceful Escape</span>
@@ -141,37 +209,42 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item reveal-up">
-                    <img src="images/gallery-1.jpg" alt="Janara Exterior">
+                    <img src="images/gallery-1.jpg" alt="Janara Exterior" loading="lazy" decoding="async" width="1500"
+                        height="2000" sizes="(max-width: 768px) 100vw, 33vw">
                     <div class="gallery-overlay">
                         <span>Nature Escape</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
-                    <img src="images/gallery-2.jpg" alt="Private Pool View">
+                    <img src="images/gallery-2.jpg" alt="Private Pool View" loading="lazy" decoding="async"
+                        width="1500" height="2000" sizes="(max-width: 768px) 100vw, 33vw">
                     <div class="gallery-overlay">
                         <span>Private Sanctuary</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
-                    <img src="images/gallery-3.jpg" alt="Luxury Cabana Interior">
+                    <img src="images/gallery-3.jpg" alt="Luxury Cabana Interior" loading="lazy" decoding="async"
+                        width="1500" height="2000" sizes="(max-width: 768px) 100vw, 33vw">
                     <div class="gallery-overlay">
                         <span>Quiet Moments</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
-                    <img src="images/gallery-4.jpg" alt="Gourmet Dining">
+                    <img src="images/gallery-4.jpg" alt="Gourmet Dining" loading="lazy" decoding="async" width="1500"
+                        height="2000" sizes="(max-width: 768px) 100vw, 33vw">
                     <div class="gallery-overlay">
                         <span>Bespoke Dining</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
-                    <img src="images/gallery-5.jpg" alt="Peaceful Bedroom">
+                    <img src="images/gallery-5.jpg" alt="Peaceful Bedroom" loading="lazy" decoding="async"
+                        width="1500" height="2000" sizes="(max-width: 768px) 100vw, 33vw">
                     <div class="gallery-overlay">
                         <span>Refined Comfort</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
-                    <img src="images/gallery-6.jpg" alt="Relaxation Lounge">
+                    <img src="images/gallery-6.jpg" alt="Relaxation Lounge" loading="lazy" decoding="async">
                     <div class="gallery-overlay">
                         <span>Serene Living</span>
 
