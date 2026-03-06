@@ -918,6 +918,25 @@ p {
     transform: translateY(0);
 }
 
+.gallery-more {
+    margin-top: 45px;
+}
+
+.gallery-page-header {
+    padding: 140px 0 70px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: var(--text-light);
+}
+
+.gallery-page-header p {
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+.gallery-category + .gallery-category {
+    padding-top: 0;
+}
+
 /* Pool Parallax Section */
 .pool-parallax {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/pool-bg.jpg') center/cover no-repeat;
@@ -1233,10 +1252,10 @@ textarea:focus {
     }
 }
 
-.reveal-up,
-.reveal-left,
-.reveal-right,
-.fade-in {
+.js .reveal-up,
+.js .reveal-left,
+.js .reveal-right,
+.js .fade-in {
     opacity: 0;
     transition: all 1s ease-out;
 }
@@ -1246,7 +1265,7 @@ textarea:focus {
     transform: translateY(0);
 }
 
-.reveal-up {
+.js .reveal-up {
     transform: translateY(50px);
 }
 
@@ -1255,7 +1274,7 @@ textarea:focus {
     transform: translateX(0);
 }
 
-.reveal-left {
+.js .reveal-left {
     transform: translateX(-50px);
 }
 
@@ -1264,7 +1283,7 @@ textarea:focus {
     transform: translateX(0);
 }
 
-.reveal-right {
+.js .reveal-right {
     transform: translateX(50px);
 }
 
