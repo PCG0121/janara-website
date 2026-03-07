@@ -124,16 +124,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. Parallax Effect for Hero
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        const hero = document.querySelector('.hero');
-        const heroContent = document.querySelector('.hero-content');
-        
-        if (hero && heroContent) {
-            hero.style.backgroundPositionY = -(scrolled * 0.3) + 'px';
-            heroContent.style.transform = `translateY(${scrolled * 0.1}px)`;
-            heroContent.style.opacity = 1 - (scrolled / 700);
-        }
-    });
+    // 7. Hero Scroll Animation
+    const hero = document.querySelector('.hero');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (hero && !reducedMotion) {
+        let ticking = false;
+
+        const updateHeroMotion = () => {
+            const rect = hero.getBoundingClientRect();
+            const travel = Math.max(rect.height * 0.9, 1);
+            const progress = Math.min(Math.max((0 - rect.top) / travel, 0), 1);
+            const parallaxY = Math.min(window.scrollY * 0.45, 420);
+            const fade = Math.max(1 - (progress * 0.55), 0.45);
+            const tilt = progress * 4;
+
+            hero.style.setProperty('--hero-progress', progress.toFixed(3));
+            hero.style.setProperty('--hero-parallax-y', `${parallaxY.toFixed(2)}px`);
+            hero.style.setProperty('--hero-fade', fade.toFixed(3));
+            hero.style.setProperty('--hero-image-tilt', `${tilt.toFixed(2)}deg`);
+
+            ticking = false;
+        };
+
+        const onHeroScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(updateHeroMotion);
+                ticking = true;
+            }
+        };
+
+        updateHeroMotion();
+        window.addEventListener('scroll', onHeroScroll, { passive: true });
+        window.addEventListener('resize', updateHeroMotion);
+    }
 });
