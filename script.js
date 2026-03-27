@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     // 1. Sticky Navbar Effect
     const navbar = document.getElementById('navbar');
@@ -31,31 +32,37 @@ document.addEventListener('DOMContentLoaded', () => {
     links.forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
-            // Reset toggle lines
-            const spans = navToggle.querySelectorAll('span');
-            spans[0].style.transform = 'none';
-            spans[1].style.opacity = '1';
-            spans[2].style.transform = 'none';
+
+            if (navToggle) {
+                // Reset toggle lines
+                const spans = navToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
     });
 
     // 3. Scroll Reveal Animations (Intersection Observer)
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-    };
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Only animate once
-            }
-        });
-    }, observerOptions);
-
     const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .fade-in');
-    revealElements.forEach(el => revealObserver.observe(el));
+
+    if (revealElements.length) {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    }
 
     // 4. Scroll to Top Button
     const scrollToTopBtn = document.getElementById('scrollToTop');
@@ -126,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. Hero Scroll Animation
     const hero = document.querySelector('.hero');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (hero && !reducedMotion) {
         let ticking = false;
@@ -157,5 +163,55 @@ document.addEventListener('DOMContentLoaded', () => {
         updateHeroMotion();
         window.addEventListener('scroll', onHeroScroll, { passive: true });
         window.addEventListener('resize', updateHeroMotion);
+    }
+
+    // 8. Modern scroll animation for sections after About
+    const animatedSections = document.querySelectorAll(
+        '#experience, #gallery, .pool-parallax, #reviews, #contact, .map-section, .footer'
+    );
+
+    if (animatedSections.length) {
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else if (entry.intersectionRatio < 0.05) {
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, {
+            threshold: [0.08, 0.25, 0.45],
+            rootMargin: '0px 0px -8% 0px'
+        });
+
+        animatedSections.forEach((section) => sectionObserver.observe(section));
+
+        if (!reducedMotion) {
+            let sectionTicking = false;
+
+            const updateSectionProgress = () => {
+                const viewportHeight = window.innerHeight || 1;
+
+                animatedSections.forEach((section) => {
+                    const rect = section.getBoundingClientRect();
+                    const progressRaw = (viewportHeight - rect.top) / (viewportHeight + rect.height);
+                    const progress = Math.min(Math.max(progressRaw, 0), 1);
+                    section.style.setProperty('--section-progress', progress.toFixed(3));
+                });
+
+                sectionTicking = false;
+            };
+
+            const onSectionScroll = () => {
+                if (!sectionTicking) {
+                    requestAnimationFrame(updateSectionProgress);
+                    sectionTicking = true;
+                }
+            };
+
+            updateSectionProgress();
+            window.addEventListener('scroll', onSectionScroll, { passive: true });
+            window.addEventListener('resize', updateSectionProgress);
+        }
     }
 });
