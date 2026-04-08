@@ -60,6 +60,11 @@
 
     <!-- Hero Section -->
     <header class="hero" id="home">
+        <div class="hero-video-bg" aria-hidden="true">
+            <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/hero-image.jpg">
+                <source src="videos/janara-tour.mp4" type="video/mp4">
+            </video>
+        </div>
         <div class="hero-overlay"></div>
 
         <!-- Floating Decorative Elements -->
@@ -131,7 +136,7 @@
             <!-- Right Visual -->
             <div class="hero-right">
                 <div class="hero-image-wrapper fade-in">
-                    <div class="hero-image-card">
+                    <div class="hero-image-card interactive-tilt">
                         <img src="images/hero-image.jpg" alt="Janara Luxury Cabana" loading="eager" fetchpriority="high"
                             decoding="async" width="2000" height="1333" sizes="(max-width: 991px) 100vw, 50vw">
                         <div class="hero-image-overlay"></div>
@@ -174,7 +179,6 @@
                     <p>Nestled in a calm and natural setting, Janara Luxury Cabana offers a peaceful escape away from
                         busy city life. Designed for couples, families, and travelers seeking relaxation, our cabana
                         provides a private and comfortable space to unwind and enjoy quiet moments.</p>
-                    <a href="#about" class="link-more">Discover relaxation <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -218,51 +222,58 @@
     <section class="gallery section-padding" id="gallery">
         <div class="container-full">
             <div class="section-header text-center">
-                <span class="subtitle">Visual Splendor</span>
-                <h2>Moments Captured</h2>
+                <span class="subtitle">Photo Categories</span>
+                <h2>Browse by Room Type</h2>
+                <p>Each photo is labeled so you can quickly understand the room type and features.</p>
             </div>
 
             <div class="gallery-grid">
                 <div class="gallery-item reveal-up">
                     <img src="images/gallery-1.jpg" alt="Fully covered private indoor pool" loading="lazy" decoding="async" width="1200"
                         height="800" sizes="(max-width: 768px) 100vw, 33vw">
+                    <div class="gallery-label">Room Type: Private Pool Room</div>
                     <div class="gallery-overlay">
-                        <span>Indoor Private Pool</span>
+                        <span>Indoor Pool View</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
                     <img src="images/gallery-2.jpg" alt="Private pool room top view" loading="lazy" decoding="async"
                         width="1200" height="800" sizes="(max-width: 768px) 100vw, 33vw">
+                    <div class="gallery-label">Room Type: Private Pool Room</div>
                     <div class="gallery-overlay">
-                        <span>Pool Design View</span>
+                        <span>Room Layout View</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
                     <img src="images/gallery-3.jpg" alt="Private pool room with king bed" loading="lazy" decoding="async"
                         width="1200" height="800" sizes="(max-width: 768px) 100vw, 33vw">
+                    <div class="gallery-label">Room Type: King Bed Room</div>
                     <div class="gallery-overlay">
-                        <span>King Bed Room</span>
+                        <span>Bedroom View</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
                     <img src="images/gallery-4.jpg" alt="Private pool suite bed setup" loading="lazy" decoding="async" width="1200"
                         height="800" sizes="(max-width: 768px) 100vw, 33vw">
+                    <div class="gallery-label">Room Type: Suite Bedroom</div>
                     <div class="gallery-overlay">
-                        <span>Private Suite Bed</span>
+                        <span>Suite Setup</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
                     <img src="images/gallery-5.jpg" alt="Luxury bed close-up in private room" loading="lazy" decoding="async"
                         width="1200" height="800" sizes="(max-width: 768px) 100vw, 33vw">
+                    <div class="gallery-label">Room Type: Luxury Bedroom</div>
                     <div class="gallery-overlay">
-                        <span>Luxury Bed Details</span>
+                        <span>Bedroom Details</span>
                     </div>
                 </div>
                 <div class="gallery-item reveal-up">
                     <img src="images/gallery-6.jpg" alt="In-room amenities and minibar setup" loading="lazy" decoding="async" width="1200"
                         height="800" sizes="(max-width: 768px) 100vw, 33vw">
+                    <div class="gallery-label">Room Type: In-Room Amenities</div>
                     <div class="gallery-overlay">
-                        <span>Room Amenities</span>
+                        <span>Amenities View</span>
 
                     </div>
                 </div>

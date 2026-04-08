@@ -214,4 +214,38 @@ document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('resize', updateSectionProgress);
         }
     }
+
+    // 9. Mouse-based 3D tilt for hero image
+    const tiltCards = document.querySelectorAll('.interactive-tilt');
+
+    tiltCards.forEach((card) => {
+        const maxTilt = reducedMotion ? 6 : 10;
+        const baseTransform = 'perspective(1200px) rotateX(0deg) rotateY(-5deg)';
+        card.style.transform = baseTransform;
+
+        const handleMove = (event) => {
+            const rect = card.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width;
+            const y = (event.clientY - rect.top) / rect.height;
+
+            const rotateY = ((x - 0.5) * (maxTilt * 2)).toFixed(2);
+            const rotateX = (((0.5 - y) * (maxTilt * 2))).toFixed(2);
+
+            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.015)`;
+            card.classList.add('is-tilting');
+        };
+
+        card.addEventListener('mousemove', handleMove);
+        card.addEventListener('pointermove', handleMove);
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = baseTransform;
+            card.classList.remove('is-tilting');
+        });
+
+        card.addEventListener('pointerleave', () => {
+            card.style.transform = baseTransform;
+            card.classList.remove('is-tilting');
+        });
+    });
 });
