@@ -1,5 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Keep hero background video playback aggressive so it starts as soon as possible.
+    const heroBgVideo = document.getElementById('heroBgVideo');
+    if (heroBgVideo) {
+        heroBgVideo.muted = true;
+        heroBgVideo.playsInline = true;
+        heroBgVideo.preload = 'auto';
+
+        const tryPlayHeroVideo = () => {
+            const playPromise = heroBgVideo.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {
+                    // Ignore autoplay promise rejections; we'll retry on user interaction.
+                });
+            }
+        };
+
+        if (heroBgVideo.readyState >= 2) {
+            tryPlayHeroVideo();
+        } else {
+            heroBgVideo.addEventListener('loadeddata', tryPlayHeroVideo, { once: true });
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && heroBgVideo.paused) {
+                tryPlayHeroVideo();
+            }
+        });
+
+        window.addEventListener('touchstart', tryPlayHeroVideo, { once: true, passive: true });
+    }
     
     // 1. Sticky Navbar Effect
     const navbar = document.getElementById('navbar');
