@@ -34,7 +34,7 @@
     <button id="scrollToTop" title="Go to top"><i class="fas fa-chevron-up"></i></button>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/yournumber" class="whatsapp-float" target="_blank" aria-label="Book via WhatsApp">
+    <a href="https://wa.me/94716508000" class="whatsapp-float" target="_blank" aria-label="Book via WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -391,6 +391,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+<select id="booking-type" style="width: 100%; padding: 15px 0; border: none; border-bottom: 1px solid var(--accent); font-family: var(--font-body); font-size: 1rem; margin-bottom: 25px; outline: none; background: transparent;">
+                                <option value="" disabled selected>Booking Type (Day / Night)</option>
+                                <option value="Day Use">Day Use (Daytime)</option>
+                                <option value="Night Stay">Night Stay (Overnight)</option>
+                                <option value="Full Day">Full Day & Night</option>
+                            </select>
                             <textarea id="message" rows="4" placeholder="Special Requests (Optional)"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Send Inquiry</button>
@@ -433,6 +439,45 @@
     </footer>
 
     <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookingForm = document.getElementById('bookingForm');
+            const formStatus = document.getElementById('formStatus');
+
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const dateIn = document.getElementById('date-in').value;
+                    const dateOut = document.getElementById('date-out').value;
+                    const bookingType = document.getElementById('booking-type').value;
+                    const message = document.getElementById('message').value;
+                    
+                    if (name && dateIn && bookingType) {
+                        const phoneNumber = "94716508000";
+                        let whatsappMessage = `*Reservation Inquiry - Janara Luxury Cabana*%0A%0A`;
+                        whatsappMessage += `*Name:* ${encodeURIComponent(name)}%0A`;
+                        whatsappMessage += `*Email:* ${encodeURIComponent(email)}%0A`;
+                        whatsappMessage += `*Booking Type:* ${encodeURIComponent(bookingType)}%0A`;
+                        whatsappMessage += `*Check-In:* ${encodeURIComponent(dateIn)}%0A`;
+                        whatsappMessage += `*Check-Out:* ${encodeURIComponent(dateOut)}%0A`;
+                        if (message) whatsappMessage += `*Special Requests:* ${encodeURIComponent(message)}`;
+
+                        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+                        
+                        const btn = bookingForm.querySelector('button');
+                        btn.textContent = 'Redirecting...';
+                        btn.disabled = true;
+                        formStatus.innerHTML = '<p style="color: #9a7737;"><i class="fab fa-whatsapp"></i> Opening WhatsApp...</p>';
+                        
+                        window.location.href = whatsappUrl;
+                    }
+                });
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 

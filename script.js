@@ -118,27 +118,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStatus = document.getElementById('formStatus');
 
     if (bookingForm) {
-        bookingForm.addEventListener('submit', (e) => {
+        bookingForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log("Form submission triggered");
             
-            // Basic validation check
+            // Get form values
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
+            const dateIn = document.getElementById('date-in').value;
+            const dateOut = document.getElementById('date-out').value;
+            const message = document.getElementById('message').value;
             
-            if (name && email) {
-                // Animate button to show progress
+            console.log("Form values:", { name, email, dateIn, dateOut });
+
+            if (name && dateIn) {
+                // Phone number for Janara Luxury Cabana
+                const phoneNumber = "94716508000";
+                
+                // Construct the message
+                let whatsappMessage = `*Reservation Inquiry - Janara Luxury Cabana*%0A%0A`;
+                whatsappMessage += `*Name:* ${encodeURIComponent(name)}%0A`;
+                whatsappMessage += `*Email:* ${encodeURIComponent(email)}%0A`;
+                whatsappMessage += `*Check-In:* ${encodeURIComponent(dateIn)}%0A`;
+                whatsappMessage += `*Check-Out:* ${encodeURIComponent(dateOut)}%0A`;
+                
+                if (message) {
+                    whatsappMessage += `*Special Requests:* ${encodeURIComponent(message)}`;
+                }
+
+                // Construct the WhatsApp URL
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+                console.log("Redirecting to:", whatsappUrl);
+
+                // Animate button
                 const btn = bookingForm.querySelector('button');
                 const originalText = btn.textContent;
-                btn.textContent = 'Processing...';
+                btn.textContent = 'Redirecting...';
                 btn.disabled = true;
 
-                // Simulate API call
+                formStatus.innerHTML = '<p style="color: var(--secondary); font-weight: 500;"><i class="fab fa-whatsapp"></i> Opening WhatsApp...</p>';
+                
+                // Direct redirection
+                window.location.href = whatsappUrl;
+
+                // Reset after a short delay in case the redirect is slow
                 setTimeout(() => {
-                    formStatus.innerHTML = '<p style="color: var(--secondary); font-weight: 500;"><i class="fas fa-check-circle"></i> Inquiry sent successfully. Our team will contact you shortly.</p>';
-                    bookingForm.reset();
                     btn.textContent = originalText;
                     btn.disabled = false;
-                }, 2000);
+                    bookingForm.reset();
+                }, 3000);
+            } else {
+                formStatus.innerHTML = '<p style="color: #e74c3c; font-weight: 500;">Please fill in your name and check-in date.</p>';
             }
         });
     }
